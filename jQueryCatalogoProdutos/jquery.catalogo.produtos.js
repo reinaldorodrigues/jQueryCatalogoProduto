@@ -28,23 +28,33 @@
         // função para mostrar as imagens
         var showImage = function(srcImg,srcImgShow){
             
+            // inicia nova imagem
             var NewImg = new Image();
             
-            $('#imgShow img').remove(); 
+            // remove a imagem se existir
+            $('#imgShow img').fadeOut(function(){$(this).remove();}); 
             
-            $(NewImg).hide().load(function(){
+            // carregar nova imagem 
+            $(NewImg).load(function(){
                 
+                //Inserir conteúdo, ao fim do conjunto de elementos.
                 $('#imgShow').append(NewImg);
                 
+                // mostrar imagem
                 $(NewImg).fadeIn();
                 
             }).attr('src',srcImg).attr('data-ishow',srcImgShow);            
             
+            // calcula um valor para a imagem maior 
+            // que fica no centro sobre as outras
             var tmhImgShow = Math.ceil(($(window).width())* 0.26274);
             
+            // se existir inseri a altura e o css
             if(  $('#cont-show').length ){
                 
                  $('#cont-show').height(tmhImgShow).width(tmhImgShow);
+                 
+                /**************************/ 
                  
                  $('#quadrado').height(tmhImgShow).width(tmhImgShow);
                  
@@ -108,7 +118,8 @@
                 // pega a url da imagem que será mostrada ao clicar na lupa/ou sinal de mais
                 var iShow       = $(".cnt-img ul .active").data('img');
                 
-                // função para carregar a imagem
+                // função para carregar a imagem 
+                // do catalogo/lista de produtos
                 showImage(ImageActive,iShow);
                 
                 // pega a altura imagem thumbs
