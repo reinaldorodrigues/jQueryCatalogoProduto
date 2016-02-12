@@ -1,0 +1,319 @@
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#catalogo{
+    float: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 333;
+    background-color: #ffffff;
+}
+#catalogo.loadcolec{
+    z-index: 999;
+}
+#catalogo.loadcolec{
+    float: left;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+        
+    z-index: 9999999;
+}
+/*
+#catalogo .cd-catg{
+    float: left;
+    display: inline;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+}
+*/
+#catalogo .cd-catg img{
+    cursor: pointer;    
+}
+#catalogo #apress{
+    margin: 0px auto;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 333;
+    background-image: url(img/fd-colecao-foto.jpg);
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+/*
+#catalogo .cnt-img{
+    float: left;
+    height: 100%;
+    min-height: 200px;
+    position: relative;
+    display: block; 
+    overflow: hidden;
+    padding-top: 200px;
+    
+}
+*/
+#catalogo .cnt-img{
+    float: left;
+    height: 100%;
+    min-height: 200px;
+    position: relative;
+    display: block; 
+    overflow: hidden;
+    padding-top: 0%;
+    
+}
+#catalogo .cnt-img ul{
+    float: left;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+        
+}
+#catalogo .cnt-img li{
+    float: left;
+    display: inline;
+    margin: 0px;
+    text-align: center;
+}
+#catalogo .cnt-img li img{    
+    display: inline-block;
+    max-width: 100%;
+
+}
+.jcatr{
+    display: none;
+    
+}
+#catalogo #cont-show{
+    float: left;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+    top: 50%;
+    background-color: transparent;
+    margin-top: 0px;
+}
+#catalogo #quadrado{
+    position: absolute;
+    z-index: 9999;
+    background-image:  url(img/fd-center.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;    
+}
+#catalogo #quadrado .fd-branco{
+    float: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(img/fd-center-img.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: -999;
+}
+#catalogo #imgShow{
+    float: left;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-image: url(img/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: transparent;
+    overflow: hidden;
+    z-index: 9998;
+    
+}
+
+#catalogo #imgShow img{
+    float: left;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    z-index: 9;
+}
+#catalogo #imgShow .lupa{
+    width: 116px;
+    height: 116px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -58px;
+    margin-top: -58px;
+    background-image: url(img/lupa.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#apress .bnts-l{
+    float: left;
+    display: block;
+    width: 450px;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #000000;
+    background-image: url(img/sombra-esq.png);
+    background-repeat: repeat-y;
+    background-position: left top;
+    background-color: transparent;
+    
+}
+#apress .bnts-l button{
+    background-image: url(img/seta-esq.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 140px;
+    height: 281px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 0px;    
+    cursor: pointer;
+    margin-top: -140.5px;
+}
+
+#apress .bnts-r{
+    float: left;
+    display: block;
+    width: 450px;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #000000;
+    background-image: url(img/sombra-dir.png);
+    background-repeat: repeat-y;
+    background-position: right top;
+    background-color: transparent;    
+    
+}
+#apress .bnts-r button{ 
+    float: right;
+    background-image: url(img/seta-dir.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    width: 140px;
+    height: 281px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    margin-top: -140.5px;
+    right:  0px;    
+    cursor: pointer;
+}
+
+#loadimgshow{
+    float: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    background-image: url(img/load.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 999999999999;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+#localimg{
+    float: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    background-image: url(img/load.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    position:  fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999999;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+#cnt{
+    width: auto;
+    position: relative;
+}
+#fecharimg{
+    position: absolute;
+    float: right;
+    display: block;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 5px;
+    background-color: #ed1a9b;
+    right: 5px;
+    top: 5px;
+    z-index: 9999999999999;
+    font-family: 'Lato',sans-serif;
+    cursor: pointer;
+}
+.fechartela{
+    position: fixed;
+    float: right;
+    display: block;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 5px;
+    background-color: #ed1a9b;
+    right: 5px;
+    top: 110px;
+    z-index: 9999999999999;
+    font-family: 'Lato',sans-serif;
+    cursor: pointer;
+}
+#cd-img{
+    float: left;
+    display: block;    
+    position: fixed;
+    z-index: 9999999;    
+    top: 0%;
+    left: 0%;
+    padding:0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    
+   
+}
+
+
+#cd-img #cdimg{
+    position: relative;
+    display: inline-block;
+}
+#cd-img #cdimg img{ 
+    float: left;
+    display: block;
+    /*width: auto;        */
+    text-align: center;
+}
