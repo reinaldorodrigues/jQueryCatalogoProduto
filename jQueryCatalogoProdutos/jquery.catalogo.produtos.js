@@ -1,5 +1,4 @@
-(function($){
-    
+(function($){   
     
     $.fn.jQueryCatalogoProdutos = function(options){
         
@@ -16,9 +15,7 @@
         
         var categSelct          = '';
         var imgThumbs           = new Array();
-        var imgShow             = new Array();
-        
-        var WindowWidth         = 0;
+        var imgShow             = new Array();        
         var ApressWidth         = 0;
         var tamanhoImagem       = 0;
         var totalImagens        = 0;
@@ -28,9 +25,7 @@
         var cNext               = 0;
         var cPrev               = 0;
         
-        var nameCateg           = '';
-        var h2Colecao           = '';
-        
+        // função para mostrar as imagens
         var showImage = function(srcImg,srcImgShow){
             
             var NewImg = new Image();
@@ -42,8 +37,6 @@
                 $('#imgShow').append(NewImg);
                 
                 $(NewImg).fadeIn();
-                
-                //$('#quadrado .fd-branco').fadeOut();
                 
             }).attr('src',srcImg).attr('data-ishow',srcImgShow);            
             
@@ -64,26 +57,31 @@
             
         };
         
-        
+        // cria o catalfo de produtos
         var catalogo = function(){
             
             var element = $("#apress li");
             
             // se existir a estrutura realiza os eventos
-            if( element.length){                
+            if( element.length){
                 
-                WindowWidth     = $(window).width(); // pega o tamanho da tela    
                 ApressWidth     = $("#apress").width(); // pega onde fica o catalogo
-                tamanhoImagem         =  parseFloat(((ApressWidth/settings.itempage))); // calcula o tamanho de cada imagem/li
-                totalImagens         = 0; // total de imagem
-                     
+                tamanhoImagem   = parseFloat(((ApressWidth/settings.itempage))); // calcula o tamanho de cada imagem/li
+                totalImagens    = 0; // total de imagem
                 
                 // conta quantos li existem
-                element.each(function(i){totalImagens = (i + 1);});
-               
-                widthTodasImagens   = parseFloat(((totalImagens*tamanhoImagem))); // tamanho com todas as imagems
+                totalImagens = element.length;
+                
+                // calcula tamanho com todas as imagems
+                widthTodasImagens   = parseFloat(((totalImagens*tamanhoImagem))); 
+                
+                // calcula o inicio do bloco 2
                 var inicioBloco2    = parseFloat(widthTodasImagens/2);
+                
+                // calcula o centro para colocar a imagem em destaque
                 var imgCentro       = Math.ceil(settings.itempage/2);
+                
+                // calcula a posição onde ficara os imagens
                 posicaoBloco    = parseFloat( inicioBloco2 - ( (imgCentro*tamanhoImagem) - tamanhoImagem ) ) ;
                
                 // tamanho do container (li) com as imagens
@@ -92,25 +90,35 @@
                 // tamanho da div principal
                 $(".cnt-img").css({ 'width' : ApressWidth+'px' });
                
-                // tamanho com todas as imagems/li
+                // tamanho com todas as imagens/li
                 $(".cnt-img ul").css({ 'width' : widthTodasImagens+'px' });
                 
+                // posição incial onde será mostrado as imagens
                 $(".cnt-img ul").css({'left' : '-'+posicaoBloco+'px'});
                 
+                // remove a imagem ativa
                 $(".cnt-img ul li").removeClass('active');
                 
+                // pega a imagem do centro e adiciona a classe active
                 $(".cnt-img ul li").eq( Math.ceil(totalImagens/2) ).addClass('active');
                 
-                
+                // pega a url da imagem que fica no centro
                 ImageActive     = $(".cnt-img ul .active").data('imgcenter');  
+                
+                // pega a url da imagem que será mostrada ao clicar na lupa/ou sinal de mais
                 var iShow       = $(".cnt-img ul .active").data('img');
+                
+                // função para carregar a imagem
                 showImage(ImageActive,iShow);
                 
-                // pega a altura imagem thumbs e adiciona a altura no UL
+                // pega a altura imagem thumbs
                 var myImg = document.querySelector(".cnt-img ul li img");
                 var currHeight = myImg.clientHeight;
+                
+                // adiciona a altura no UL
                 $(".cnt-img ul").height(currHeight);
                 
+                // css para colocar as imagens no centro
                 $("#catalogo .cnt-img ul").css({
                     'margin-top' : '-' + (currHeight/2) + 'px'
                 });
@@ -119,19 +127,18 @@
             }
         };
         
+        // montra estrutura para apresentação 
+        // da categoria/produtos clicado
         $('.cd-catg',this).click(function(){
             
             // pega a categoria quando clicado
-            var idCateg = $(this).data('cid');
+            var idCateg         = $(this).data('cid'); 
             
-           $("#catalogo").addClass('loadcolec');
+            // cria o titulo da categoria/produtos
+            var nomeCategoria   = '<h2 id="ttcateg">'+$(this).data('categname')+'</h2>';
             
-            // pega o nome da colecao
-            nameCateg = $(this).data('categname');
-            
-            h2Colecao = $("#colecao h2").html();
-            
-            //$("#colecao h2").html('<span class="txt1">'+h2Colecao+'</span> '+'<span class="txt2">// '+ nameCateg+'</span>' );
+            // adiciona a classe
+            $("#catalogo").addClass('loadcolec');
             
             // percorre todas a lista e pega a thumbs 
             // e as imagens grandes
@@ -144,9 +151,10 @@
             // abre a tela de load -> tela preta com carregamento
             $('body').append('<div id="catalogload"></div>');
             
-            // caminha imagem de fundo / load
+            // carrega a imagem de fundo / load
             var urlImgBgLoading = location.href+'js/img/load.gif';            
             
+            // css do fundo
             $("#catalogload").css({
                 'display'               : 'block',
                 'position'              : 'fixed',
@@ -164,20 +172,20 @@
             // pega a lista da categoria selecionada
             categSelct =  $("#cid-"+idCateg).html();
             
-            //var urlImgFd = location.href+'js/img/fd-center-img.png';
+            // montra a estrutura das 
+            // imagens e mantem oculta
+            $(this).parent().prepend('<div style="display:none;" id="apress"><div class="cnt-img">'+nomeCategoria+categSelct+'<div id="cont-show"><div id="imgShow"><div class="lupa"></div></div></div></div></div>');            
             
-            // inseri a lista mas mantem oculta
-            $(this).parent().prepend('<div style="display:none;" id="apress"><div class="cnt-img">'+categSelct+'<div id="cont-show"><div id="imgShow"><div class="lupa"></div></div></div></div></div>');            
-            
-            
+            // cria botão/mais/lupa
             $("#cont-show").prepend(function(){
                 return $('<div id="quadrado"></div>').click( ShowImg );
             });
             
+            // cria o botão fechar
             $('#apress').append(function(){return $('<div class="fechartela">X</div>').click( fecharTela); });
                         
                         
-            // cria o div do botao fechar
+            // cria o botão de anterior ou proximo
             $('#apress').append(function(){return $('<button id="prev"></button>').click( prevClick); });
             $('#apress').append(function(){return $('<button id="next"></button>').click( nextClick); });
             
@@ -185,29 +193,36 @@
             var categItems = $('#apress .cnt-img ul'),
                 items   = categItems.find('li'),            
                 first   = items.filter(':first');
-            first.before(items.clone(true));   
-            //first.after(items.clone(true));
+            first.before(items.clone(true));
 			
-			
-            // mostra a
+            // mostra todos os elementos montado
             $("#apress").fadeIn(function(){
                 
                 // oculta a lista de categoria
                 $(".cd-catg").fadeOut();
                 
-                // remove o load
+                // remove a tela de carregamento/load
                 $("#catalogload").fadeOut(function(){$(this).remove();});                
                 
             });            
             
             $(".avscolec").css({'display' : 'none'});
+            
+            // função de animação do catalogo
             catalogo();
         });
         
+        // função de animação do catalogo
         catalogo();
+        
         //chama a funcao onResize todas as vezes que a tela for redimensionada
         $(window).resize(function(){
+            
+            // função de animação do catalogo
             catalogo();
+            
+            // se existir alguma imagem grande 
+            // sendo visualizada será removido
             if( $("#cd-img").length ){
                 $("#localimg").remove();
                 $("#cd-img").remove();

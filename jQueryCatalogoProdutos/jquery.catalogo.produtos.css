@@ -39,6 +39,9 @@
     height: 100%;
     z-index: 333;
 }
+#apress h2{
+    z-index: 999999;
+}
 #catalogo .cnt-img{
     float: left;
     height: 100%;
@@ -254,6 +257,6 @@
 #cd-img #cdimg img{ 
     float: left;
     display: block;
-    /*width: auto;        */
+    width: auto;        
     text-align: center;
 }
