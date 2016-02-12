@@ -1,7 +1,7 @@
 (function($){
     
     
-    $.fn.jCatResp = function(options){
+    $.fn.jQueryCatalogoProdutos = function(options){
         
         var defaults        = {
             'itempage'      : 5, 
@@ -43,7 +43,7 @@
                 
                 $(NewImg).fadeIn();
                 
-                $('#quadrado .fd-branco').fadeOut();
+                //$('#quadrado .fd-branco').fadeOut();
                 
             }).attr('src',srcImg).attr('data-ishow',srcImgShow);            
             
@@ -167,19 +167,19 @@
             //var urlImgFd = location.href+'js/img/fd-center-img.png';
             
             // inseri a lista mas mantem oculta
-            $(this).parent().prepend('<div style="display:none;" id="apress"><div class="cnt-img">'+categSelct+'<div id="cont-show"><div id="imgShow"><div class="lupa"></div></div></div></div><div class="bnts-l"></div><div class="bnts-r"></div></div>');            
+            $(this).parent().prepend('<div style="display:none;" id="apress"><div class="cnt-img">'+categSelct+'<div id="cont-show"><div id="imgShow"><div class="lupa"></div></div></div></div></div>');            
             
             
             $("#cont-show").prepend(function(){
-                return $('<div id="quadrado"><div class="fd-branco"></div></div>').click( ShowImg );
+                return $('<div id="quadrado"></div>').click( ShowImg );
             });
             
             $('#apress').append(function(){return $('<div class="fechartela">X</div>').click( fecharTela); });
                         
                         
             // cria o div do botao fechar
-            $('.bnts-l').append(function(){return $('<button id="prev"></button>').click( prevClick); });
-            $('.bnts-r').append(function(){return $('<button id="next"></button>').click( nextClick); });
+            $('#apress').append(function(){return $('<button id="prev"></button>').click( prevClick); });
+            $('#apress').append(function(){return $('<button id="next"></button>').click( nextClick); });
             
             // clona os elementos para duplicar
             var categItems = $('#apress .cnt-img ul'),
@@ -399,7 +399,7 @@
              cPrev++;
            
             if(cPrev == 1){
-            $('#quadrado .fd-branco').fadeIn(); 
+            //$('#quadrado .fd-branco').fadeIn(); 
             
             // localiza o imagem ativa
             $(".cnt-img ul li").each(function(i){
@@ -462,7 +462,7 @@
            
             if(cNext == 1){
            
-            $('#quadrado .fd-branco').fadeIn(); 
+            //$('#quadrado .fd-branco').fadeIn(); 
             
             // localiza o imagem ativa
             $(".cnt-img ul li").each(function(i){

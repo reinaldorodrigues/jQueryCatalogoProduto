@@ -28,15 +28,6 @@
         
     z-index: 9999999;
 }
-/*
-#catalogo .cd-catg{
-    float: left;
-    display: inline;
-    width: 50%;
-    height: 100%;
-    text-align: center;
-}
-*/
 #catalogo .cd-catg img{
     cursor: pointer;    
 }
@@ -47,22 +38,7 @@
     width: 100%;
     height: 100%;
     z-index: 333;
-    background-image: url(img/fd-colecao-foto.jpg);
-    background-position: center top;
-    background-repeat: no-repeat;
 }
-/*
-#catalogo .cnt-img{
-    float: left;
-    height: 100%;
-    min-height: 200px;
-    position: relative;
-    display: block; 
-    overflow: hidden;
-    padding-top: 200px;
-    
-}
-*/
 #catalogo .cnt-img{
     float: left;
     height: 100%;
@@ -106,24 +82,10 @@
     background-color: transparent;
     margin-top: 0px;
 }
+
 #catalogo #quadrado{
     position: absolute;
-    z-index: 9999;
-    background-image:  url(img/fd-center.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;    
-}
-#catalogo #quadrado .fd-branco{
-    float: left;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url(img/fd-center-img.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    z-index: -999;
+    z-index: 9999;    
 }
 #catalogo #imgShow{
     float: left;
@@ -137,87 +99,60 @@
     background-color: transparent;
     overflow: hidden;
     z-index: 9998;
+    text-align: center;
     
 }
 
 #catalogo #imgShow img{
-    float: left;
-    display: block;
+    float: none;
+    display: inline-block;
     max-width: 100%;
     height: auto;
     z-index: 9;
 }
 #catalogo #imgShow .lupa{
-    width: 116px;
-    height: 116px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    margin-left: -58px;
-    margin-top: -58px;
-    background-image: url(img/lupa.png);
+    bottom: 20px;
+    margin-left: -50px;
+    background-image: url(img/mais.png);
     background-repeat: no-repeat;
     background-position: center center;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    -moz-opacity: 0.4;
+    -khtml-opacity: 0.4;
+    opacity: 0.4;
 }
-
-#apress .bnts-l{
-    float: left;
-    display: block;
-    width: 450px;
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-color: #000000;
-    background-image: url(img/sombra-esq.png);
-    background-repeat: repeat-y;
-    background-position: left top;
+#apress #prev{
     background-color: transparent;
-    
-}
-#apress .bnts-l button{
-    background-image: url(img/seta-esq.png);
+    background-image: url(img/seta.png);
     background-repeat: no-repeat;
-    background-position: left center;
-    width: 140px;
-    height: 281px;
+    background-position: 0px 0px;
+    width: 100px;
+    height: 100px;
     border: none;
-    background-color: transparent;
     position: absolute;
     top: 50%;
-    left: 0px;    
+    left: 5px;    
     cursor: pointer;
-    margin-top: -140.5px;
+    margin-top: -50px;
 }
-
-#apress .bnts-r{
-    float: left;
-    display: block;
-    width: 450px;
-    height: 100%;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    background-color: #000000;
-    background-image: url(img/sombra-dir.png);
-    background-repeat: repeat-y;
-    background-position: right top;
-    background-color: transparent;    
-    
-}
-#apress .bnts-r button{ 
+#apress #next{ 
     float: right;
-    background-image: url(img/seta-dir.png);
-    background-repeat: no-repeat;
-    background-position: right center;
-    width: 140px;
-    height: 281px;
-    border: none;
     background-color: transparent;
+    background-image: url(img/seta.png);
+    background-repeat: no-repeat;
+    background-position: 0px -100px;
+    width: 100px;
+    height: 100px;
+    border: none;    
     position: absolute;
     top: 50%;
-    margin-top: -140.5px;
-    right:  0px;    
+    margin-top: -50px;
+    right:  5px;    
     cursor: pointer;
 }
 
@@ -277,19 +212,24 @@
     font-family: 'Lato',sans-serif;
     cursor: pointer;
 }
-.fechartela{
+.fechartela{    
     position: fixed;
     float: right;
     display: block;
     color: #ffffff;
     font-size: 25px;
-    padding: 5px;
-    background-color: #ed1a9b;
+    padding: 10px 12px;
+    background-color: #cccccc;
     right: 5px;
-    top: 110px;
+    top: 5px;
     z-index: 9999999999999;
     font-family: 'Lato',sans-serif;
+    font-weight: 900;
     cursor: pointer;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    line-height: 100%;
 }
 #cd-img{
     float: left;

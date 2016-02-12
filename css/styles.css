@@ -70,6 +70,7 @@ body{
     max-width: 200px;
     width: 100%;
     border: 1px solid #cccccc;
+    cursor: pointer;
 }
 
 #colecao #catalogo .cd-catg .cd-col img{    
@@ -86,4 +87,5 @@ body{
     text-transform: uppercase;
     font-weight: 900;
     color: #4a4a4a;
+    
 }
