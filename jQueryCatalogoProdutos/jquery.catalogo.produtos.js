@@ -387,7 +387,7 @@
                     $('#apress .cnt-img ul li:last-child').clone(true).prependTo('#apress .cnt-img ul');
                     $('#apress .cnt-img ul li:last-child').remove();
                     
-                    // calcula a nova posiÃ§Ã£o atual menos a tamanho da imagem 
+                    // calcula a nova posição atual menos a tamanho da imagem 
                     // e inseri o novo valor via css
                     var nvLeftNext = marginAtualPrev - tamanhoImagem;
                     $(".cnt-img ul").css({'left': nvLeftNext});
@@ -451,7 +451,7 @@
                 // remove a primeira imagem apos ser clonada
                 $('#apress .cnt-img ul li:first-child').remove();
                 
-                // calcula a nova posiÃ§Ã£o atual menos a tamanho da imagem 
+                // calcula a nova posição atual menos a tamanho da imagem 
                 // e inseri o novo valor via css
                 var nvLeftNext = marginAtualNext + tamanhoImagem;
                 $(".cnt-img ul").css({'left': nvLeftNext});
@@ -461,7 +461,7 @@
             $("#apress .cnt-img ul").animate({ 
                 "left": "-="+mAtualNext+"px"
             },"slow",function(){
-                //ativa o botÃ£o apos o termino da animação
+                //ativa o botão apos o termino da animação
                 $("#next").removeAttr('disabled');
                 if(  cNext >=1){
                     cNext = 0;
