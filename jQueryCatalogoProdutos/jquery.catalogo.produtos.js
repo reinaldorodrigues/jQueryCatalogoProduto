@@ -1,5 +1,4 @@
-(function($){   
-    
+(function($){       
     $.fn.jQueryCatalogoProdutos = function(options){
         
         var defaults        = {
@@ -53,9 +52,7 @@
             if(  $('#cont-show').length ){
                 
                  $('#cont-show').height(tmhImgShow).width(tmhImgShow);
-                 
-                /**************************/ 
-                 
+               
                  $('#quadrado').height(tmhImgShow).width(tmhImgShow);
                  
                  $('#cont-show').css({
@@ -187,7 +184,8 @@
             // imagens e mantem oculta
             $(this).parent().prepend('<div style="display:none;" id="apress"><div class="cnt-img">'+nomeCategoria+categSelct+'<div id="cont-show"><div id="imgShow"><div class="lupa"></div></div></div></div></div>');            
             
-            // cria botão/mais/lupa
+            // cria botão/mais/lupa e quando 
+            // clicado chama a função ShowImg
             $("#cont-show").prepend(function(){
                 return $('<div id="quadrado"></div>').click( ShowImg );
             });
@@ -240,26 +238,25 @@
             }
         });
         
-        
+        // funcção para mostrar a imagem grande
         var SImg = function(sImg){
             
+            // inicia uma nova imagem
             var NImg = new Image();
             
+            // remove a div localimg 
             $('#localimg').remove(); 
             
-            $("body").css({
-                'overflow': 'hidden'
-            });
+            // desabilita a barra de rolagem
+            $("body").css('overflow','hidden');
             
-             $("#top-header").fadeOut();
-            
+            // monta a estrutura onde 
+            // será mostrado a imagem
             $('body').append('<div id="loadimgshow"></div>')
                     .append('<div id="localimg"></div><div id="cd-img"><div id="cdimg"></div></div>');
-                  
-                  $("#cd-img img").append('<div></div>');
-                  
+            $("#cd-img img").append('<div></div>');                  
             $('#cdimg').append(function(){return $('<div id="fecharimg">X</div>').click( fecharImg); });
-           //<div id="fecharimg">X</div>
+            
             
             $(NImg).hide().load(function(){
                 
@@ -272,119 +269,51 @@
                 $("#cd-img").height($(window).height())
                         .width($(window).width());
                 
+                var nvAltura        = 0;
+                var nvLargura       = 0;
                 
-                
-                var nvAlturaImg     = 0;
-                var nvLarguraImg    = 0;
                 //pega  a altura e largura da imagem
-                var heightImg = this.height,
-                        widthImg = this.width;                  
+                var heightImg   = this.height;
+                var widthImg    = this.width;                  
                 
-                var telaHeight =  window.innerHeight,//screen.height,
-                        telaWidth =  window.innerWidth //screen.width;
+                //pega a altura e largura da tela
+                var telaHeight  =  window.innerHeight;//screen.height,
+                var telaWidth   =  window.innerWidth //screen.width;
                 
-                
-                if(heightImg >= widthImg){
-                    
-                    nvAlturaImg     =  parseInt(telaHeight - (telaHeight*0.20));                    
-                    document.querySelector("#cd-img img").height = nvAlturaImg;
-                    
+                // se a largura atual da imagem for 
+                // maoir ou igual a tela calcula 
+                // um novo tamanho com 15% a menos
+                // e se não for maior mantem 
+                // a largura original
+                if( widthImg >= telaWidth ){
+                    nvLargura = (widthImg / heightImg) * ( heightImg - ( heightImg *0.40));
                 }else{
+                    nvLargura = widthImg;
+                }
                     
-                    if( widthImg <= telaWidth ){
-                        nvLarguraImg = widthImg;
-                    }else{
-                        nvLarguraImg =  parseInt(telaWidth - (telaWidth*0.20) );
-                        
-                        if(nvLarguraImg >= widthImg){
-                            nvLarguraImg = widthImg;
-                        }
-                    }
-                    
-                    
-                    document.querySelector("#cd-img img").width = nvLarguraImg;
-                    
+                if(heightImg >= telaHeight){
+                    nvAltura = (heightImg / widthImg) * nvLargura;
+                }else{
+                    nvAltura = heightImg;
                 }
                 
-                //$("#cd-img #cdimg img").height($(window).height());
-                
-                
-                
-               
-                
-                
-                // var tImg = imgLoad(sImg);
-                 
-                // alert(tImg);
-                 /*
-                // pega a altura imagem thumbs e adiciona a altura no UL
-                //var myImg       = document.querySelector("#cd-img img");
-                var myImg       = document.querySelector("#cd-img");
-                var currHeight  = myImg.clientHeight;
-                var currwidth   = myImg.clientWidth;
-               
-                $("#cd-img").css({                    
-                    'height'        : (($(window).height()) - 100) + 'px',
-                    'margin-left'   : '-'+( currwidth/2) + 'px',
-                });
-                */
-                
-                /*
-                $("#cd-img").css({
-                    'width'         : (currwidth-50) + 'px',
-                    'height'        : (currHeight-50) + 'px',
-                    'margin-left'   : '-'+( (currwidth-50)/2 )+'px',
-                    'margin-top'    : '-'+( (currHeight-50)/2 )+'px',
+                $("#cd-img img").css({
+                    'height'    : nvAltura + 'px',
+                    'width'     : nvLargura + 'px'  
                 });
                 
+                var psWidth     = (telaWidth - nvLargura) / 2;
+                var psHeight    = (telaHeight - nvAltura) / 2;
                 
-                 $("#cd-img img").height( (currHeight-50) )
-                         .width( (currwidth-50) );
-                 */
-                //if(currwidth >= currHeight ){
-                    
-                    //$("#cd-img").height( (currHeight-50) );
-                //}
-                //alert(currHeight );
-                
-                
+                $("#cdimg").css({
+                    'height'    : nvAltura +'px',
+                    'width'     : nvLargura +'px',
+                    'left'      : psWidth + 'px',
+                    'top'       : psHeight + 'px'
+                });
                 
             }).attr('src',sImg);            
             
-            /*
-            var iLoad = new Image();
-            // evento disparado quando a imagem terminou o carregamento
-            iLoad.onload = function() {
-                
-                var nvAlturaImg     = 0;
-                var nvLarguraImg    = 0;
-                //pega  a altura e largura da imagem
-                var heightImg = this.height,
-                        widthImg = this.width;                  
-                
-                var telaHeight =  window.innerHeight,//screen.height,
-                        telaWidth =  window.innerWidth //screen.width;
-                
-                
-                if(heightImg >= widthImg){
-                    
-                    nvAlturaImg     =  parseInt(telaHeight -   (telaHeight*0.15));                    
-                    document.querySelector("#cd-img img").height = nvAlturaImg;
-                    
-                }else{
-                    
-                    nvLarguraImg    = (telaWidth*widthImg)/widthImg;
-                    
-                    if(nvLarguraImg >= widthImg ){
-                        nvLarguraImg = (widthImg-100);
-                    }
-                    
-                    document.querySelector("#cd-img img").width = nvLarguraImg;
-                    
-                }
-            };
-            iLoad.src = sImg;
-            */
         };
         
         function fecharImg(){
@@ -393,102 +322,97 @@
                 'overflow': 'auto'
             });
             
-            $("#top-header").fadeIn();
-            
             $('#localimg').remove();
             $('#cd-img').remove();
             $('#fecharimg').remove();
             
         }
         
-       function ShowImg(){
-           var srcImg = $("#imgShow img").data('ishow');
-           SImg(srcImg);
+        function ShowImg(){
+            var srcImg = $("#imgShow img").data('ishow');
+            SImg(srcImg);
         };
         
-       function fecharTela(){
-          $('#apress').remove();
-          $('.cd-catg').fadeIn();
-          
-          // $("#colecao h2").html();
-          // $("#colecao h2").html(h2Colecao);
-          $("#catalogo").removeClass('loadcolec');
-          $("#loadimgshow").remove();
-           $(".avscolec").css({'display' : 'block'});
-  
-       }
+        function fecharTela(){           
+            
+            $('#apress').remove();
+            $('.cd-catg').fadeIn();
+            
+            $("#catalogo").removeClass('loadcolec');
+            $("#loadimgshow").remove();
+            $(".avscolec").css({'display' : 'block'});
+            
+        }
+        
         // funcao para mostrar as imagens anteriores
         function prevClick(){
             
             var activeAtaul = 0;
             
-             cPrev++;
+            cPrev++;
            
             if(cPrev == 1){
-            //$('#quadrado .fd-branco').fadeIn(); 
-            
-            // localiza o imagem ativa
-            $(".cnt-img ul li").each(function(i){
-                if( $(this).hasClass('active') ){
-                    activeAtaul = i;
-                    $(this).removeClass('active');
+                
+                // localiza o imagem ativa
+                $(".cnt-img ul li").each(function(i){
+                    if( $(this).hasClass('active') ){
+                        activeAtaul = i;
+                        $(this).removeClass('active');
+                    }
+                });
+                
+                // adiciona a classe active na proxima div/imagem
+                $(".cnt-img ul li").eq( (activeAtaul-1) ).addClass('active');
+                
+                // mostra a imagem central
+                var iCentral    = $(".cnt-img ul li").eq( (activeAtaul-1) ).data('imgcenter');
+                var iShow       = $(".cnt-img ul li").eq( (activeAtaul-1) ).data('img');
+                
+                showImage(iCentral,iShow);
+                
+                // desativa o botão para evitar erro
+                $("#prev").attr('disabled', 'disabled');
+                
+                // pega a left atyal do div/ul com todas as imagens
+                var marginAtualPrev = parseFloat($(".cnt-img ul").css('left').split('px')[0]);
+                
+                // tamanho da imagem
+                var mAtual          = parseFloat(tamanhoImagem);            
+                
+                // se left for maior ou igual a zero clona 
+                // a ultima imagem e insere ela em primeiro
+                if( (marginAtualPrev) >= 0 ){
+                    
+                    // clona os elementos para duplicar
+                    $('#apress .cnt-img ul li:last-child').clone(true).prependTo('#apress .cnt-img ul');
+                    $('#apress .cnt-img ul li:last-child').remove();
+                    
+                    // calcula a nova posiÃ§Ã£o atual menos a tamanho da imagem 
+                    // e inseri o novo valor via css
+                    var nvLeftNext = marginAtualPrev - tamanhoImagem;
+                    $(".cnt-img ul").css({'left': nvLeftNext});
                 }
+                
+                // realiza o movimento com base no tamanho da div/imagem
+                $("#apress .cnt-img ul").animate({ 
+                    "left": "+="+mAtual+"px"
+                },"slow",function(){
+                    //ativa o botão apos o termino da animação
+                    $("#prev").removeAttr('disabled');
+                    
+                if(  cPrev >=1){cPrev = 0;}
+                
             });
-            
-            // adiciona a classe active na proxima div/imagem
-            $(".cnt-img ul li").eq( (activeAtaul-1) ).addClass('active');
-            
-            // mostra a imagem central
-            var iCentral    = $(".cnt-img ul li").eq( (activeAtaul-1) ).data('imgcenter');
-            var iShow       = $(".cnt-img ul li").eq( (activeAtaul-1) ).data('img');
-            
-            showImage(iCentral,iShow);
-            
-            // desativa o botÃ£o para evitar erro
-            $("#prev").attr('disabled', 'disabled');
-            
-            // pega a left atyal do 
-            // div/ul com todas as imagens
-            var marginAtualPrev = parseFloat($(".cnt-img ul").css('left').split('px')[0]);            
-            
-            // tamanho da imagem
-            var mAtual          = parseFloat(tamanhoImagem);            
-            
-            // se left for maior ou igual a zero clona 
-            // a ultima imagem e insere ela em primeiro
-            if( (marginAtualPrev) >= 0 ){
-                
-                // clona os elementos para duplicar
-                $('#apress .cnt-img ul li:last-child').clone(true).prependTo('#apress .cnt-img ul');
-                $('#apress .cnt-img ul li:last-child').remove();
-                
-                // calcula a nova posiÃ§Ã£o atual menos a tamanho da imagem 
-                // e inseri o novo valor via css
-                var nvLeftNext = marginAtualPrev - tamanhoImagem;                
-                $(".cnt-img ul").css({'left': nvLeftNext});
-            }
-            // realiza o movimento com base no tamanho da div/imagem
-            $("#apress .cnt-img ul").animate({ 
-                "left": "+="+mAtual+"px"
-            },"slow",function(){
-                  //ativa o botÃ£o apos o termino da animaÃ§Ã£o
-                  $("#prev").removeAttr('disabled');
-                  
-                   if(  cPrev >=1){
-                       cPrev = 0;
-                  }
-              });
         }
-        }
-        function nextClick(){
-            
-            var activeAtaul = 0;
-            
-            cNext++;
-           
-            if(cNext == 1){
-           
-            //$('#quadrado .fd-branco').fadeIn(); 
+    }
+    
+    function nextClick(){
+        
+        var activeAtaul = 0;
+        
+        cNext++;
+        
+        if(cNext == 1){
             
             // localiza o imagem ativa
             $(".cnt-img ul li").each(function(i){
@@ -507,28 +431,25 @@
             
             showImage(iCentral,iShow);
             
-            // desativa o botÃ£o para evitar erro
+            // desativa o botão para evitar erro
             $("#next").attr('disabled', 'disabled');
             
-            // pega a left atyal do 
-            // div/ul com todas as imagens
+            // pega a left atual do div/ul com todas as imagens
             var marginAtualNext = parseFloat($(".cnt-img ul").css('left').split('px')[0]);
             
             // tamanho da imagem
             var mAtualNext      = parseFloat(tamanhoImagem);
-            
-            //alert(widthTodasImagens)
             
             // trabalhos com o valor absoluto do left e se maior ou igual ao 
             // tamanho de todas as imagens - a div onde mostra as imagens 
             // clona a ultima imagem e insere ela em ultimo lugar e remove a primenra
             if( (Math.abs(marginAtualNext)) >= (widthTodasImagens - (ApressWidth+tamanhoImagem) )  ){
                 
-                 // clona os elementos para duplicar e insere em ultimo
-                 $('#apress .cnt-img ul li:first-child').clone(true).appendTo('#apress .cnt-img ul');
+                // clona os elementos para duplicar e insere em ultimo
+                $('#apress .cnt-img ul li:first-child').clone(true).appendTo('#apress .cnt-img ul');
                  
-                 // remove a primeira imagem apos ser clonada
-                 $('#apress .cnt-img ul li:first-child').remove();
+                // remove a primeira imagem apos ser clonada
+                $('#apress .cnt-img ul li:first-child').remove();
                 
                 // calcula a nova posiÃ§Ã£o atual menos a tamanho da imagem 
                 // e inseri o novo valor via css
@@ -537,35 +458,16 @@
                    
             }
             // realiza o movimento com base no tamanho da div/imagem
-              $("#apress .cnt-img ul").animate({ 
-                  "left": "-="+mAtualNext+"px"
-              },"slow",function(){
-                  //ativa o botÃ£o apos o termino da animaÃ§Ã£o
-                  $("#next").removeAttr('disabled');
-                  if(  cNext >=1){
-                       cNext = 0;
-                  }
-              });
-              
+            $("#apress .cnt-img ul").animate({ 
+                "left": "-="+mAtualNext+"px"
+            },"slow",function(){
+                //ativa o botÃ£o apos o termino da animação
+                $("#next").removeAttr('disabled');
+                if(  cNext >=1){
+                    cNext = 0;
+                }
+            });
         }  
-        }
-        
-          function imgLoad(img){
-            //  var tamanhos = new Array();
-              var iLoad = new Image();
-              // evento disparado quando a imagem terminou o carregamento
-              iLoad.onload = function() {
-                  var height = this.height,
-                          width = this.width;                  
-              };
-              iLoad.src = img;
-          alert( height);
-           // return [height,width];
-        }
-                         
-        
-    };
-
+    }
+};
 })(jQuery);
-
-

@@ -251,8 +251,7 @@
 
 
 #cd-img #cdimg{
-    position: relative;
-    display: inline-block;
+    position: absolute;
 }
 #cd-img #cdimg img{ 
     float: left;
